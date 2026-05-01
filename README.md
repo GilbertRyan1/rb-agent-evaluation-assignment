@@ -1,6 +1,6 @@
-# Agent Evaluation Assignment
+# Agent Simulation Evaluation Assignment
 
-This repository contains an evaluation pipeline for comparing human survey answers with AI-generated answers. The task is not only to check whether both answers are semantically similar, but also to understand whether the AI answer preserves the specific behaviour, preferences, motivations, details, and response style of the human respondent.
+This repository provides an evaluation pipeline for assessing how closely AI-agent interview responses align with real human interview answers. The task is not only to check whether both answers are semantically similar, but also to understand whether the AI answer simulates the specific behaviour, preferences, motivations, details, and response style of the human respondent.
 
 The pipeline uses three evaluation layers:
 
