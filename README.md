@@ -53,7 +53,14 @@ rb-agent-evaluation-assignment/
 
 ## Setup
 
-Create a virtual environment if needed, then install the required packages:
+
+If you want to run it, clone the repo : 
+```bash
+GITHUB_REPO_URL = "https://github.com/GibertRyan1/rb-agent-evaluation-assignment.git"
+
+!rm -rf /content/rb-agent-evaluation-assignment
+```
+install the required packages:
 
 ```bash
 pip install -r requirements.txt
