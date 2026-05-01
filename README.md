@@ -119,13 +119,13 @@ It produces:
 semantic_similarity_score
 ```
 
-This score is useful for measuring broad semantic overlap, but it does not fully capture whether the AI preserved the exact human preference, motivation, or response style.
+This score is useful for measuring broad semantic overlap, but it does not fully capture whether the AI preserved the exact human preference, motivation, or response style. Similarity ranges from –1 (opposite meaning) to +1 (identical meaning).
 
 ---
 
 ### 2. LLM-as-Judge Evaluation
 
-This layer uses Gemini to evaluate how well the AI answer simulates the specific human respondent.
+This layer uses Gemini to evaluate how well the AI answer simulates the specific human respondent. the LLM scores each dimension on an integer scale from 1 to 5, where 1 = very poor match, 2 = weak match, 3 = partial match, 4 = good match and 5 = very strong match.
 
 The judge scores each answer pair across the following dimensions:
 
@@ -151,7 +151,7 @@ short_summary
 
 ### 3. Content-Level Comparison
 
-This layer breaks each human and AI answer into small meaningful content elements. It checks what was preserved, omitted, changed, contradicted, or added without support.
+This layer breaks each human and AI answer into small meaningful content elements. It checks what was preserved, omitted, changed, contradicted, or added without support. Note: Content‑level metrics – produced by the content‑comparison layer. The metrics are real numbers between 0 and 1.
 
 Content element types include:
 
