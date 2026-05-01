@@ -190,22 +190,25 @@ The main content-level metrics are:
 
 The pipeline creates the following files under `outputs/`:
 
-| Output | Explanation |
-|---|---|
-| `semantic_similarity_results.xlsx` | Input data with semantic similarity scores added |
-| `llm_judge_results.xlsx` | Input data with Gemini-as-judge evaluation scores added |
-| `content_comparison_results.xlsx` | Input data with content-level comparison metrics added |
-| `final_combined_results.xlsx` | Main final file containing all evaluation layers |
-| `analysis_summary.xlsx` | Excel workbook containing all summary tables in separate sheets |
-| `metric_summary.csv` | Overall summary of each evaluation metric |
-| `category_summary.csv` | Aggregated results grouped by question category |
-| `person_summary.csv` | Aggregated results grouped by respondent/person ID |
-| `failure_type_summary.csv` | Counts of the main failure types identified by the judge |
-| `verdict_summary.csv` | Counts of strong, partial, and weak simulation matches |
-| `correlation_summary.csv` | Correlation between semantic similarity, judge scores, and content-level metrics |
-| `high_semantic_low_alignment.csv` | Cases where semantic similarity is high but actual alignment is weak |
-| `best_examples.csv` | Strongest examples based on content-level F1 |
-| `worst_examples.csv` | Weakest examples based on content-level F1 |
+## Output Files
+
+| Output file | What it contains | Why it matters |
+|---|---|---|
+| `semantic_similarity_results.xlsx` | The original input data plus one embedding-based similarity score for each human-answer/AI-answer pair. | This is the baseline layer. It shows whether the two answers are broadly close in meaning, but it does not prove that the AI preserved the specific human respondent. |
+| `llm_judge_results.xlsx` | The first LLM-as-judge evaluation output, including scores for behavior match, preference match, reasoning match, detail preservation, unsupported additions control, response style match, and overall simulation match. | This is the first structured evaluator output. It shows how well the AI answer simulates the human answer across human-relevant dimensions, but some rows may fail because of API rate limits. |
+| `llm_judge_results_repaired.xlsx` | The completed LLM-as-judge file after failed or rate-limited rows have been rerun. | This is the judge file used for final analysis. It should contain complete judge scores for all rows. |
+| `content_comparison_results.xlsx` | The full row-level output after content-level comparison is added. It includes recall, precision, F1, unsupported addition rate, omission rate, and a short content-level explanation for each answer pair. | This is the most interpretable evaluation layer. It shows what the AI preserved, missed, changed, or invented. |
+| `final_combined_results.xlsx` | The main final result file containing the original data, semantic similarity scores, Gemini-as-judge scores, and content-level comparison metrics in one place. | This is the primary result file for submission and review. It allows the reviewer to inspect the full evaluation for every row. |
+| `analysis_summary.xlsx` | An Excel workbook with the main summary tables saved as separate sheets. | This gives a compact overview of the results without requiring the reviewer to inspect every individual row. |
+| `metric_summary.csv` | Overall average, median, minimum, maximum, valid-row count, and missing-row count for each metric. | This shows the overall performance pattern of the AI answers across all evaluation dimensions. |
+| `category_summary.csv` | Average scores grouped by question category. | This shows whether the AI performs better or worse for certain types of market-research questions. |
+| `person_summary.csv` | Average scores grouped by respondent/person ID. | This helps identify whether some simulated respondents are represented more accurately than others. |
+| `failure_type_summary.csv` | Counts of the main failure types assigned by the Gemini-as-judge evaluation. | This shows the most common failure patterns, such as unsupported additions, missing human detail, changed reasoning, or changed preference. |
+| `verdict_summary.csv` | Counts of strong, partial, and weak simulation matches. | This gives a high-level view of how many AI answers are acceptable simulations versus weak matches. |
+| `correlation_summary.csv` | Correlations between semantic similarity, judge scores, and content-level metrics. | This shows whether broad semantic similarity agrees with stricter simulation-quality measures. A weak correlation would suggest that semantic similarity alone is not enough. |
+| `high_semantic_low_alignment.csv` | Cases where semantic similarity is relatively high but judge/content-level alignment is weak. | These are important failure cases. They show answers that look similar at a topic level but fail to preserve the specific human answer. |
+| `best_examples.csv` | The strongest answer pairs based on content-level F1 and related alignment scores. | These examples show where the AI successfully preserved the human answer. They can be used as positive examples in the report or presentation. |
+| `worst_examples.csv` | The weakest answer pairs based on content-level F1 and related alignment scores. | These examples show the clearest failures, such as major omissions, unsupported additions, or changed meaning. They are useful for explaining why stricter evaluation is needed. |
 
 ---
 
@@ -226,5 +229,5 @@ Together, the three layers show whether the AI answer is:
 
 - The input file is expected at `data/RB_GenAI_Datatest.xlsx`.
 - All generated files are saved under `outputs/`.
-- The notebook is portable and is not tied to Google Colab.
-- The Gemini API key should not be committed to the repository.
+- The notebook is portable and is not tied to Google Colab, jupyter notebook, etc.
+- The Gemini API key should not be committed to the repository. 
