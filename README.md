@@ -41,7 +41,7 @@ rb-agent-evaluation-assignment/
 │       └── analysis.py
 │
 ├── notebooks/
-│   └── 01_agent_evaluation_pipeline.ipynb
+│   └──agent_evaluation_pipeline.ipynb
 │
 ├── outputs/
 │
