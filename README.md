@@ -87,7 +87,7 @@ Create `GEMINI_API_KEY` as an environment variable.
 Open and run:
 
 ```text
-notebooks/01_agent_evaluation_pipeline.ipynb
+notebooks/agent_evaluation_pipeline.ipynb
 ```
 
 The notebook runs the full pipeline in this order:
