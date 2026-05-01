@@ -45,9 +45,6 @@ rb-agent-evaluation-assignment/
 │
 ├── outputs/
 │
-├── reports/
-│
-├── presentation/
 │
 └── submission/
 ```
