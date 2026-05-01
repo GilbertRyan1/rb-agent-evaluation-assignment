@@ -15,22 +15,6 @@ from agent_eval.schemas import CONTENT_SCHEMA
 PathLike = Union[str, Path]
 
 
-CONTENT_COLUMNS = [
-    "content_recall",
-    "content_precision",
-    "content_f1",
-    "unsupported_addition_rate",
-    "omission_rate",
-    "content_comparison_summary",
-    "human_content_elements",
-    "ai_content_elements",
-    "content_matches",
-    "missing_human_content",
-    "unsupported_ai_content",
-    "content_error",
-]
-
-
 def empty_content_result(error: str) -> dict:
     return {
         "content_recall": None,
@@ -93,7 +77,7 @@ def run_content_comparison(
     model_name: str = "gemini-2.5-flash",
     temperature: float = 0,
     limit: Optional[int] = None,
-    sleep_seconds: float = 15,
+    sleep_seconds: float = 20,
 ) -> pd.DataFrame:
     df = load_input_data(input_path)
 
@@ -127,56 +111,3 @@ def run_content_comparison(
     save_excel(final_df, output_path)
 
     return final_df
-
-
-def find_failed_content_rows(df: pd.DataFrame) -> pd.Series:
-    missing_score = df["content_f1"].isna() if "content_f1" in df.columns else True
-
-    has_error = (
-        df["content_error"].fillna("").astype(str).str.strip() != ""
-        if "content_error" in df.columns
-        else False
-    )
-
-    return missing_score | has_error
-
-
-def rerun_failed_content_rows(
-    input_path: PathLike,
-    output_path: PathLike,
-    model_name: str = "gemini-2.5-flash",
-    temperature: float = 0,
-    sleep_seconds: float = 60,
-) -> pd.DataFrame:
-    df = pd.read_excel(input_path)
-
-    for col in CONTENT_COLUMNS:
-        if col not in df.columns:
-            df[col] = None
-
-    failed_mask = find_failed_content_rows(df)
-    failed_indices = df[failed_mask].index.tolist()
-
-    print(f"Failed content rows to rerun: {len(failed_indices)}")
-
-    for idx in tqdm(failed_indices):
-        row = df.loc[idx]
-
-        try:
-            result = compare_content_single_row(
-                row=row,
-                model_name=model_name,
-                temperature=temperature,
-            )
-        except Exception as error:
-            result = empty_content_result(str(error))
-
-        for col, value in result.items():
-            df.loc[idx, col] = value
-
-        if sleep_seconds > 0:
-            time.sleep(sleep_seconds)
-
-    save_excel(df, output_path)
-
-    return df
