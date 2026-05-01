@@ -1,0 +1,6 @@
+main_failure_type,count
+unsupported additions,12
+major mismatch,11
+changed behavior,3
+changed preference,3
+changed reasoning,1

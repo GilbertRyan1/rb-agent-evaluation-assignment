@@ -1,0 +1,14 @@
+metric,column,mean_score,median_score,min_score,max_score,valid_rows,missing_rows
+Behavior Match,behavior_match_score,2.2666666666666666,2.0,1.0,5.0,30,0
+Detail Preservation,detail_preservation_score,1.8,1.5,1.0,5.0,30,0
+Response Style Match,response_style_match_score,1.8,2.0,1.0,3.0,30,0
+Preference Match,preference_match_score,1.6,1.0,1.0,5.0,30,0
+Overall Simulation Match,overall_simulation_match_score,1.3333333333333333,1.0,1.0,3.0,30,0
+Reasoning Match,reasoning_match_score,1.2333333333333334,1.0,1.0,3.0,30,0
+Unsupported Additions Control,unsupported_additions_control_score,1.0333333333333334,1.0,1.0,2.0,30,0
+Unsupported Addition Rate,unsupported_addition_rate,0.7282135897435896,0.7011538461538461,0.4,1.0,30,0
+Semantic Similarity,semantic_similarity_score,0.6677450756231944,0.6741051077842712,0.3997839689254761,0.8491313457489014,30,0
+Omission Rate,omission_rate,0.4157764444444444,0.45,0.0,1.0,30,0
+Content Recall,content_recall,0.37072099999999997,0.315,0.0,1.0,30,0
+Content F1,content_f1,0.23919546742799686,0.25,0.0,0.57,30,0
+Content Precision,content_precision,0.22259023853923857,0.19375,0.0,0.83333,30,0

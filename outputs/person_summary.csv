@@ -1,0 +1,4 @@
+person_id,semantic_similarity_score,behavior_match_score,preference_match_score,reasoning_match_score,detail_preservation_score,unsupported_additions_control_score,response_style_match_score,overall_simulation_match_score,content_recall,content_precision,content_f1,unsupported_addition_rate,omission_rate
+c_human,0.6259887218475342,3.0,2.0,1.5,2.0,1.1,1.7,1.5,0.5,0.16000923076923076,0.21800574660633484,0.7712407692307692,0.236
+g_human,0.7221746742725372,1.7,1.4,1.2,1.5,1.0,2.2,1.3,0.24383300000000002,0.282233,0.22919014285714284,0.6839000000000001,0.604666
+s_human,0.6550718307495117,2.1,1.4,1.0,1.9,1.0,1.5,1.2,0.36833,0.22552848484848487,0.27039051282051285,0.7295,0.40666333333333327
